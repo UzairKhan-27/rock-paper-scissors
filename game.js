@@ -64,12 +64,21 @@ function playRound(humanSelection,computerSelection)
             }
         }       
 }
-
-const humanSelection=getComputerChoice();
-const computerSelection=getHumanChoice();
-console.log(humanSelection);
-console.log(computerSelection);
+function playGame()
+{
+    for(let i=0;i<5;i++)
+    {
+        const humanSelection=getComputerChoice();
+        const computerSelection=getHumanChoice();
+        console.log(humanSelection);
+        console.log(computerSelection);
+        playRound(humanSelection,computerSelection);
+        console.log(humanScore);
+        console.log(computerScore);
+        console.log(`Round ${i+1} completed\n`);
+    }
+}
 let humanScore=0,computerScore=0;
-playRound(humanSelection,computerSelection);
-console.log(humanScore);
-console.log(computerScore);
+playGame();
+alert(`Game Over , Final Scores\nComputer : ${computerScore}\nHuman : ${humanScore}`);
+
