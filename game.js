@@ -10,5 +10,18 @@ function getComputerChoice()
     else
         return "error";
 }
-choice=getComputerChoice();
+function getHumanChoice()
+{
+    let humanChoice=prompt("rock , paper or scissor ?");   
+    if(humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissor" )
+    {
+        return alert("Check spelling and make sure all are small letters");
+    }
+    return humanChoice;
+}
+let choice=getComputerChoice();
 console.log(choice);
+
+choice=getHumanChoice();
+console.log(choice);
+
