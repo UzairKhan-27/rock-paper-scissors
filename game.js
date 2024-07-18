@@ -10,16 +10,7 @@ function getComputerChoice()
     else
         return "error";
 }
-function getHumanChoice()
-{
-    let humanChoice=prompt("rock , paper or scissor ?");   
-    humanChoice=humanChoice.toLowerCase();
-    if(humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissor" )
-    {
-        return alert("Check spelling and make sure all are small letters");
-    }
-    return humanChoice;
-}
+
 function playRound(humanSelection,computerSelection)
 {
     if(humanSelection===computerSelection)
@@ -64,21 +55,30 @@ function playRound(humanSelection,computerSelection)
             }
         }       
 }
-function playGame()
-{
-    for(let i=0;i<5;i++)
-    {
-        const humanSelection=getComputerChoice();
-        const computerSelection=getHumanChoice();
-        console.log(humanSelection);
-        console.log(computerSelection);
-        playRound(humanSelection,computerSelection);
-        console.log(humanScore);
-        console.log(computerScore);
-        console.log(`Round ${i+1} completed\n`);
-    }
-}
+
+let computerChoice=getComputerChoice();
 let humanScore=0,computerScore=0;
-playGame();
+let humanChoice;
+const humanSelection=document.querySelector("#humanSelection");
+humanSelection.addEventListener("click",(event)=>{
+    let target = event.target;
+    console.log(target.id);
+    switch(target.id)
+    {
+        case "rock":
+            humanChoice="rock";
+            break;
+        case "paper":
+            humanChoice="paper";
+            break;
+        case "scissor":
+            humanChoice="scissor";
+            break;
+
+    }
+    playRound(humanChoice,computerChoice);
+    humanSelection.removeEventListener("click",event);
+});
 alert(`Game Over , Final Scores\nComputer : ${computerScore}\nHuman : ${humanScore}`);
+
 
