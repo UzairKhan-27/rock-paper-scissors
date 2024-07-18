@@ -63,6 +63,8 @@ const humanSelection=document.querySelector("#humanSelection");
 const humanScoreDisplay=document.querySelector("#humanScore");
 const computerScoreDisplay=document.querySelector("#computerScore");
 
+const gameOver=document.querySelector("#gameOver h1");
+
 function handleClick(event)
 {
     let target = event.target;
@@ -87,7 +89,10 @@ function handleClick(event)
     if(humanScore===2 || computerScore===2)
     {
         humanSelection.removeEventListener("click",handleClick);
-        alert(`Game Over , Final Scores\nComputer : ${computerScore}\nHuman : ${humanScore}`);
+        if(humanScore>computerScore)
+            gameOver.textContent=`Game Over You Win ! ! !`;
+        else
+        gameOver.textContent=`Game Over You Lose :(`;
         return;
     }
 
