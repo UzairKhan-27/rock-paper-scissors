@@ -14,18 +14,20 @@ function getComputerChoice()
 function playRound(humanSelection,computerSelection)
 {
     if(humanSelection===computerSelection)
-        return alert("Draw");
+    {
+        gameOver.textContent=`Round Drawn both chose ${humanSelection}`;
+    }
     else if(humanSelection==="rock")
     {
         if(computerSelection==="paper")
         {
             computerScore++;
-            return alert(`You Lose ${computerSelection} beats ${humanSelection}`);
+            gameOver.textContent=(`You Lose ${computerSelection} beats ${humanSelection}`);
         }
         else if(computerSelection==="scissor")
         {
             humanScore++;
-            return alert(`You Win ${humanSelection} beats ${computerSelection}`);
+            gameOver.textContent=(`You Win ${humanSelection} beats ${computerSelection}`);
             
         }
     }
@@ -34,24 +36,24 @@ function playRound(humanSelection,computerSelection)
         if(computerSelection==="scissor")
         {
             computerScore++;
-            return alert(`You Lose ${computerSelection} beats ${humanSelection}`);
+            gameOver.textContent=(`You Lose ${computerSelection} beats ${humanSelection}`);
         }
         else if(computerSelection==="rock")
         {
             humanScore++;
-            return alert(`You Win ${humanSelection} beats ${computerSelection}`);
+            gameOver.textContent=(`You Win ${humanSelection} beats ${computerSelection}`);
         }
     }
     else if(humanSelection==="scissor")
         {
             if(computerSelection==="rock")
             {    computerScore++;
-                return alert(`You Lose ${computerSelection} beats ${humanSelection}`);
+                gameOver.textContent=(`You Lose ${computerSelection} beats ${humanSelection}`);
             }
             else if(computerSelection==="paper")
             {
                 humanScore++;
-                return alert(`You Win ${humanSelection} beats ${computerSelection}`);
+                gameOver.textContent=(`You Win ${humanSelection} beats ${computerSelection}`);
             }
         }       
 }
@@ -59,6 +61,7 @@ function playRound(humanSelection,computerSelection)
 let computerChoice;
 let humanScore=0,computerScore=0;
 let humanChoice;
+
 const humanSelection=document.querySelector("#humanSelection");
 const humanScoreDisplay=document.querySelector("#humanScore");
 const computerScoreDisplay=document.querySelector("#computerScore");
@@ -68,7 +71,6 @@ const gameOver=document.querySelector("#gameOver h1");
 function handleClick(event)
 {
     let target = event.target;
-    console.log(target.id);
     switch(target.id)
     {
         case "rock":
@@ -84,19 +86,21 @@ function handleClick(event)
     computerChoice=getComputerChoice();
     console.log(computerChoice);    
     playRound(humanChoice,computerChoice);
-    humanScoreDisplay.textContent=`Player Score: ${humanScore}`;
-    computerScoreDisplay.textContent=`Computer Score: ${computerScore}`;
-    if(humanScore===2 || computerScore===2)
+    humanScoreDisplay.textContent=`Your Score : ${humanScore}`;
+    computerScoreDisplay.textContent=`Computer Score : ${computerScore}`;
+    if(humanScore===5 || computerScore===5)
     {
         humanSelection.removeEventListener("click",handleClick);
         if(humanScore>computerScore)
             gameOver.textContent=`Game Over You Win ! ! !`;
         else
-        gameOver.textContent=`Game Over You Lose :(`;
-        return;
+            gameOver.textContent=`Game Over You Lose :(`;
+
     }
+    
 
 }
+
 humanSelection.addEventListener("click",handleClick);
 
 
