@@ -56,11 +56,15 @@ function playRound(humanSelection,computerSelection)
         }       
 }
 
-let computerChoice=getComputerChoice();
+let computerChoice;
 let humanScore=0,computerScore=0;
 let humanChoice;
 const humanSelection=document.querySelector("#humanSelection");
-humanSelection.addEventListener("click",(event)=>{
+const humanScoreDisplay=document.querySelector("#humanScore");
+const computerScoreDisplay=document.querySelector("#computerScore");
+
+function handleClick(event)
+{
     let target = event.target;
     console.log(target.id);
     switch(target.id)
@@ -74,11 +78,20 @@ humanSelection.addEventListener("click",(event)=>{
         case "scissor":
             humanChoice="scissor";
             break;
-
     }
+    computerChoice=getComputerChoice();
+    console.log(computerChoice);    
     playRound(humanChoice,computerChoice);
-    humanSelection.removeEventListener("click",event);
-});
-alert(`Game Over , Final Scores\nComputer : ${computerScore}\nHuman : ${humanScore}`);
+    humanScoreDisplay.textContent=`Player Score: ${humanScore}`;
+    computerScoreDisplay.textContent=`Computer Score: ${computerScore}`;
+    if(humanScore===2 || computerScore===2)
+    {
+        humanSelection.removeEventListener("click",handleClick);
+        alert(`Game Over , Final Scores\nComputer : ${computerScore}\nHuman : ${humanScore}`);
+        return;
+    }
+
+}
+humanSelection.addEventListener("click",handleClick);
 
 
